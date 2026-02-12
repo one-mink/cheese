@@ -15,4 +15,6 @@ def translate(data):
         bin.append(byte % 20)
     return bin
 
+bin_data = translate(raw_data)
+
 print(translate(raw_data))

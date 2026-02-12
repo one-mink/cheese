@@ -1,6 +1,6 @@
 import berserk
 
-session = berserk.TokenSession('LICHESS API TOKEN')
+session = berserk.TokenSession('LICHESS API')
 client = berserk.Client(session=session)
 
 email = client.account.get_email()
@@ -17,6 +17,6 @@ def move(c_id, place):
     return "move ok"
 
 def accept_challenge(c_id):
-    session_op = berserk.TokenSession('ENEMY API TOKEN')
+    session_op = berserk.TokenSession('2ND LICHESS API')
     client_op = berserk.Client(session=session_op)
     client_op.challenges.accept(c_id)
