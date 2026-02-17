@@ -1,4 +1,4 @@
-<img width="1" height="2" alt="image" src="https://github.com/user-attachments/assets/6086e729-be3e-4d9f-a75b-673d5498c4ea" /># Cheese
+# Cheese
 
 ## About
 Cheese stores your image on lichess.org. It takes the binary data of the image and converts them into chess moves.
