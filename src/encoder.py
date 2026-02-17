@@ -1,19 +1,17 @@
-import read
 import chess
-#import lichess
+import lichess
 
 offline = True
+
 full_game_data = []
 
 board = chess.Board()  #Creates virtual chess board
-#c_id = lichess.play_game() #gets game id from lichess
-data = read.bin_data #binary data of the image
 moves = sorted([move.uci() for move in board.legal_moves]) #checks legal moves
 game_num = 1
-
 games = [] #game id of played games
 
-test_data = [6, 17, 4, 0, 3, 18, 3, 11, 0, 13, 0, 10, 1, 6, 0, 10, 0, 0, 0, 0, 0, 0, 0, 13, 3, 13, 3, 12, 3, 4, 17, 18, 23, 0, 1, 17, 0, 17, 0, 8, 15, 14, 6, 5, 7, 4, 2, 3, 4, 3, 5, 1, 15, 1]
+if offline == False:
+    c_id = None #gets game id from lichess
 
 def move(move):
     board.push_uci(move)
@@ -32,6 +30,11 @@ def encode(data):
    global game_num
 
    game_data = []
+   board.reset()
+
+   if offline == False:
+       c_id = lichess.play_game()
+       games.append(c_id)
 
    for e in data:
        placed = False
@@ -52,7 +55,6 @@ def encode(data):
            m = moves[e]
            bin = moves.index(m)
            print(m, bin)
-           print(moves)
 
            try:
                if board.turn == chess.WHITE:
@@ -67,10 +69,6 @@ def encode(data):
 
    if game_data:
         full_game_data.append(game_data)
+        game_num += 1
 
-
-
-
-encode(data)
-print(game_num)
-print(full_game_data)
+   print(game_num)

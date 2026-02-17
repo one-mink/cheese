@@ -1,2 +1,3 @@
-import lichess
-import read
+import ui
+
+ui.main()

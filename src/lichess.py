@@ -1,14 +1,16 @@
 import berserk
 import chess
 
-session = berserk.TokenSession('api token')    #White
+token_white = 'api token'
+token_black = 'second api token'
+
+
+session = berserk.TokenSession(token_white)
 client = berserk.Client(session=session)
 username = "cheese_bot"
 
-session_op = berserk.TokenSession('second api token')  #Black
+session_op = berserk.TokenSession(token_black)
 client_op = berserk.Client(session=session_op)
-
-email = client.account.get_email()
 
 def play_game():
     challenge = client.challenges.create(username="cheese_bot2", rated=False, color="white")

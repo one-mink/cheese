@@ -9,5 +9,5 @@ def translate(data):
 
         png = ((a*20) + b) % 256
         png_data.append(png)
-    with open("dec_banana.png", "wb") as f:
+    with open("dec_img.png", "wb") as f:
         f.write(png_data)

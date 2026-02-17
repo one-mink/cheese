@@ -6,7 +6,7 @@ def read(file):
       data = bytearray(f)
    return data
 
-raw_data = read('banana.png')
+#raw_data = read(filepath)
 
 def translate(data):
     bin = []
@@ -15,4 +15,4 @@ def translate(data):
         bin.append(byte % 20)
     return bin
 
-bin_data = translate(raw_data)
+#
