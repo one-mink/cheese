@@ -1,4 +1,4 @@
-# Cheese
+<img width="1" height="2" alt="image" src="https://github.com/user-attachments/assets/6086e729-be3e-4d9f-a75b-673d5498c4ea" /># Cheese
 
 ## About
 Cheese stores your image on lichess.org. It takes the binary data of the image and converts them into chess moves.
@@ -10,7 +10,14 @@ python-chess
 
 ## How to use it
 Clone the repo and move into "cheese/src"
+
 Edit lichess.py and put in your api tokens.
+Make sure this is enabled:
+
+<img width="524" height="201" alt="2026-02-17-195337_hyprshot" src="https://github.com/user-attachments/assets/c4f30166-d43d-416a-b6f1-1ee46767276d" />
+<img width="518" height="130" alt="2026-02-17-195351_hyprshot" src="https://github.com/user-attachments/assets/24506cab-40e9-4417-8fb7-42c95e7d6313" />
+
+
 
 Then exceute main.py
 
