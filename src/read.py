@@ -16,5 +16,3 @@ def translate(data):
     return bin
 
 bin_data = translate(raw_data)
-
-print(translate(raw_data))

@@ -1,7 +1,9 @@
 import berserk
+import chess
 
 session = berserk.TokenSession('api token')    #White
 client = berserk.Client(session=session)
+username = "cheese_bot"
 
 session_op = berserk.TokenSession('second api token')  #Black
 client_op = berserk.Client(session=session_op)
@@ -25,3 +27,22 @@ def move_b(c_id, place):
 def get_board(c_id):
     board_state = client.board.stream_game_state(c_id)
     return board_state
+
+def get_last_games(number):
+    games = client.games.export_by_player(username, max=number)
+    game_list = list(games)
+    all_uci_moves = []
+
+    for game in game_list:
+        board = chess.Board()
+        uci_moves = []
+
+        moves_data = game['moves'].split()
+
+        for move_s in moves_data:
+            move_obj = board.parse_san(move_s)
+            uci_moves.append(move_obj.uci())
+            board.push(move_obj)
+
+        all_uci_moves.append(uci_moves)
+    return all_uci_moves
