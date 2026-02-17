@@ -1,7 +1,7 @@
 # Cheese
 
 ## About
-Cheese stores your image on lichess.com. It takes the binary data of the image and converts them into chess moves.
+Cheese stores your image on lichess.org. It takes the binary data of the image and converts them into chess moves.
 Then the chess moves are played automaticcaly on lichess and last you can download the data of the games and restore your image again!
 
 ## Dependecies
