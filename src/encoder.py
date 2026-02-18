@@ -1,5 +1,7 @@
 import chess
 import lichess
+import time
+import json
 
 offline = True
 
@@ -8,20 +10,16 @@ full_game_data = []
 board = chess.Board()  #Creates virtual chess board
 moves = sorted([move.uci() for move in board.legal_moves]) #checks legal moves
 game_num = 1
-games = [] #game id of played games
+game_id = [] #game id of played games
 
-if offline == False:
-    c_id = None #gets game id from lichess
+c_id = None
 
-def move(move):
+def move_white(move):
     board.push_uci(move)
-    if offline == False:
-        lichess.move(c_id, move)
 
-def move_b(move):
+
+def move_black(move):
     board.push_uci(move)
-    if offline == False:
-        lichess.move_b(c_id, move)
 
 def encode(data):
    global moves
@@ -32,43 +30,57 @@ def encode(data):
    game_data = []
    board.reset()
 
-   if offline == False:
-       c_id = lichess.play_game()
-       games.append(c_id)
-
    for e in data:
        placed = False
        while not placed:
            moves = sorted([move.uci() for move in board.legal_moves])
 
-           if  board.is_game_over() or e >= len(moves):
+           if  e >= len(moves):
                full_game_data.append(game_data)
                board.reset()
 
                game_data = []
                game_num += 1
-
-               if offline == False:
-                   c_id = lichess.play_game()
-                   games.append(c_id)
                continue
            m = moves[e]
            bin = moves.index(m)
            print(m, bin)
 
-           try:
-               if board.turn == chess.WHITE:
-                   move(m)
-               elif board.turn == chess.BLACK:
-                   move_b(m)
-               game_data.append(m)
-               placed = True
-           except:
-               print('error')
-               break
+           if board.turn == chess.WHITE:
+                   move_white(m)
+           elif board.turn == chess.BLACK:
+                   move_black(m)
+           game_data.append(m)
+           placed = True
+
+           if board.is_game_over():
+               full_game_data.append(game_data)
+               board.reset()
+               game_data = []
+               game_num += 1
 
    if game_data:
         full_game_data.append(game_data)
         game_num += 1
 
+   if offline == False:
+       for games in full_game_data:
+           board = chess.Board()
+           current_id = lichess.play_game()
+           game_id.append(current_id)
+
+           for move in games:
+               if board.turn == chess.WHITE:
+                   lichess.move(current_id, move)
+               elif board.turn == chess.BLACK:
+                   lichess.move_b(current_id, move)
+               board.push_uci(move)
+               time.sleep(0.2)
+
+           lichess.resign(current_id)
+           
+       with open("games.json", "w") as f:
+            json.dump(game_id, f)
+
+   print("Game IDs! Saved in games.json! ", game_id)
    print(game_num)

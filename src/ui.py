@@ -6,15 +6,17 @@ import json
 import lichess
 
 def main():
-    mode = input("Do ypu want to decode or encode an image? (decode/encode)")
+    mode = input("Do you want to decode or encode an image? (decode/encode)")
 
     if mode == "encode":
+        bin_data = None
         filepath = input("Which image do you want to chessify? (Filepath) ")
         try:
             raw_data = read.read(filepath)
             bin_data = read.translate(raw_data)
-        except:
-            print('Image not found')
+        except Exception as e:
+            print({e})
+            return
 
         online = input("Do you want do store your image on lichess? (yes/no) ")
         if online == "yes":
@@ -30,9 +32,14 @@ def main():
     if mode == "decode":
         data = input("Do you want to get your Image from lichess? (yes/no) ")
         if data == "yes":
-            number = input("In how many games the image is stored? ")
             decoder.online = True
-            chess_data = lichess.get_last_games(number)
+            chess_data = []
+            with open("games.json", "r") as f:
+                 game_id_list = json.load(f)
+                 for game_id in game_id_list:
+                     current_board = lichess.get_last_games(game_id)
+                     chess_data.append(current_board)
+            print(chess_data)
 
         else:
             file_path = input("Where are your chess games? (.json)")

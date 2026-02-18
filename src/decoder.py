@@ -11,7 +11,7 @@ def decode(games_data):
     global total_data
 
     total_data = []
-
+    print(games_data)
     for games in games_data:
         board = chess.Board()
         for m in games:
@@ -22,6 +22,6 @@ def decode(games_data):
                 board.push_uci(m)
             else:
                 print('not found')
-
+    print(total_data)
     if len(total_data) > 1:
         write.translate(total_data)
