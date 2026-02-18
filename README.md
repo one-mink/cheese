@@ -5,13 +5,17 @@ Cheese stores your image on lichess.org. It takes the binary data of the image a
 Then the chess moves are played automaticcaly on lichess and last you can download the data of the games and restore your image again!
 
 ## Dependecies
+```
 berserk,
 python-chess
-
+```
 ## How to use it
 Clone the repo and move into "cheese/src"
 
-Edit lichess.py and put in your api tokens.
+Edit lichess.py and put in your api tokens. And mark your self as a bot!!
+```
+curl -d '' https://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer <yourTokenHere>"
+```
 Make sure this is enabled:
 
 <img width="524" height="201" alt="2026-02-17-195337_hyprshot" src="https://github.com/user-attachments/assets/c4f30166-d43d-416a-b6f1-1ee46767276d" />
