@@ -27,9 +27,9 @@ If you store offline then the game data will be stored in encoded.json
 If you do store on lichess it may take a while...
 If you see an "error" that means that there was an error with the network. You need to restart the process. :(  (I will change that soon)
 
-(lichess decoding doesn't work yet!!)
+
 To decode the image you select the path of the json file when it was stored offline.
-If you stored it on lichess you put in the number of the last games in or the challange ids (c_id).
+If you stored it on lichess you put in the c_ids into games.json (last ones are saved automatically)
 Your image now will be stored in dec_img.png
 
 
